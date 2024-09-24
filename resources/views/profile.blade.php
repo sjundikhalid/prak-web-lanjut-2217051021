@@ -56,7 +56,7 @@
 <body>
     <div class="container">
         <div class="gambar">
-            <img src="https://pbs.twimg.com/media/Fz3KtjQWwAALpWn.jpg:large" alt="">
+            <img src="{{ asset('assets/img/foto1.png') }}" alt="">
         </div>
         <div class="profil">
             <h3><?= $nama ?></h3>
