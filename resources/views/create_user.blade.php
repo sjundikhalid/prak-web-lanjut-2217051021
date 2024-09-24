@@ -1,28 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Create User</title>
-</head>
-<body>
-    <h1>halaman create</h1>
-    <form action="{{ route('user.store') }}" method="POST">
-        @csrf
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama"><br>
-
-        <label for="npm">NPM:</label>
-        <input type="text" id="npm" name="npm"><br>
-
-        <label for="kelas">Kelas:</label>
-        <input type="text" id="kelas" name="kelas"><br>
-
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,10 +63,12 @@
                     <input type="text" class="form-control" id="nama" placeholder="name@example.com" name="nama" required>
                     <label for="floatingInput">Nama</label>
                 </div>
-                <div class="form-floating m-1">
-                    <input type="text" class="form-control" id="kelas" placeholder="kelas@example.com" name="kelas" required>
-                    <label for="floatingInput">Kelas</label>
-                </div>
+                <label for="id_kelas">Kelas</label>
+                <select name="kelas_id" id="kelas_id" required>
+                    @foreach($kelas as $kelasItem)
+                    <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>
+                    @endforeach
+                </select>
                 <div class="form-floating m-1">
                     <input type="text" class="form-control" id="npm" placeholder="npm@example.com" name="npm" required>
                     <label for="floatingInput">NPM</label>
