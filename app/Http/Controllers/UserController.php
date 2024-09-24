@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kelas;
 use App\Models\UserModel;
+use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
 {
@@ -23,7 +24,7 @@ class UserController extends Controller
         return view('create_user', ['kelas'=> Kelas::all(),]);
     }
 
-    public function store(Request $request){
+    public function store(UserRequest $request){
         $validateData = $request->validate([
             'nama' => 'required|string|max:255',
             'npm' => 'required|string|max:255',
