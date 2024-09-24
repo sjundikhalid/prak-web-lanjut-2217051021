@@ -1,28 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Halaman Create User</title>
-</head>
-<body>
-    <h1>halaman create</h1>
-    <form action="{{ route('user.store') }}" method="POST">
-        @csrf
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama"><br>
-
-        <label for="npm">NPM:</label>
-        <input type="text" id="npm" name="npm"><br>
-
-        <label for="kelas">Kelas:</label>
-        <input type="text" id="kelas" name="kelas"><br>
-
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,21 +57,40 @@
 <body>
     <div class="container">
         <div class="formlogin">
-            <h1 style="font-size:25px;" class="text-center">Masukkan Nama, NPM, Kelas</h1>
+            <h1 style="font-size:25px;" class="text-center mb-4">Masukkan Nama, NPM, Kelas</h1>
             <form action="{{ route('user.store') }}" class="forminput" method="post">@csrf
-                <div class="form-floating m-1">
-                    <input type="text" class="form-control" id="nama" placeholder="name@example.com" name="nama" required>
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" id="nama" placeholder="name@example.com" name="nama">
                     <label for="floatingInput">Nama</label>
                 </div>
-                <div class="form-floating m-1">
-                    <input type="text" class="form-control" id="kelas" placeholder="kelas@example.com" name="kelas" required>
-                    <label for="floatingInput">Kelas</label>
+
+                @foreach($errors->get('nama') as $msg)
+                <p class="text-danger">{{$msg}}</p>
+                @endforeach
+
+                <div class="input-group mb-4">
+                <label class="input-group-text" for="inputGroupSelect01">Kelas</label>
+                    <select class="form-select" id="kelas_id" name="kelas_id">
+                        @foreach($kelas as $kelasItem)
+                        <option value="{{$kelasItem->id}}">{{$kelasItem->nama_kelas}}</option>
+                        @endforeach
+                    </select>
                 </div>
+
+                @foreach($errors->get('kelas') as $msg)
+                <p class="text-danger">{{$msg}}</p>
+                @endforeach
+
                 <div class="form-floating m-1">
-                    <input type="text" class="form-control" id="npm" placeholder="npm@example.com" name="npm" required>
+                    <input type="text" class="form-control" id="npm" placeholder="npm@example.com" name="npm">
                     <label for="floatingInput">NPM</label>
                 </div>
-                <button type="submit" name="login">LOG IN</button>
+
+                @foreach($errors->get('npm') as $msg)
+                <p class="text-danger">error woi</p>
+                @endforeach
+
+                <button type="submit" name="login">CREATE</button>
             </form>
         </div>
     </div>
