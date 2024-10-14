@@ -28,10 +28,11 @@
         .table-container{
             background-color: #ffffff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 500px;
-            width: 600px;
+            height: 90%;
+            width: 50%;
             margin: auto;
             margin-top: 50px;
             border-radius: 25px;
@@ -49,7 +50,7 @@
             flex-direction: column;
             align-items: center;
         }
-        button{
+        .submit-button{
             padding: 12px 30px;
             width: 150px;
             margin-top: 20px;
@@ -59,7 +60,7 @@
             border-radius: 25px;
             font-weight: bolder;
         }
-        button:hover{
+        .submit-button:hover{
             cursor: pointer;
             background-color: #003285;
         }
