@@ -53,7 +53,7 @@
                     <input type="file" id="foto" name ="foto" class="form-control">
                 </div> -->
 
-                <button type="submit" name="login">EDIT</button>
+                <button class="edit-button" type="submit" name="login">EDIT</button>
             </form>
         </div>
     </div>

@@ -9,6 +9,7 @@
                 <th>Nama</th>
                 <th>NPM</th>
                 <th>Kelas</th>
+                <th>Foto</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -21,6 +22,9 @@
                     <td><?= $user['nama'] ?></td>
                     <td><?= $user['npm'] ?></td>
                     <td><?= $user['nama_kelas'] ?></td>
+                    <td>@if($user->foto)
+                    <img src="{{asset($user->foto)}}" alt="User Photo" width="100" class="mt-2">
+                    @endif</td>
                     <td><a href="{{route('users.show', $user->id)}}" class="btn btn-success btn-sm">Detail</a>
                         <a href="{{route('user.edit', $user['id'])}}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{route('user.destroy', $user['id'])}}" method="POST" style="display:inline;">
