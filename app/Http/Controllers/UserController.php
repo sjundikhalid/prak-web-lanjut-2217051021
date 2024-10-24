@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use App\Models\Fakultas;
 use App\Models\UserModel;
 use App\Http\Requests\UserRequest;
 
@@ -24,29 +25,39 @@ class UserController extends Controller
 
     public function create(){
         $kelasModel = new Kelas();
+        $fakultasModel = new Fakultas();
         $kelas = $kelasModel->getKelas();
+        $fakultas = $fakultasModel->getFakultas();
+        $jurusan = ['Fisika', 'Kimia', 'Biologi', 'Matematika', 'Ilmu Komputer'];
         $data = [
             'title' => 'Create User',
             'kelas' => $kelas,
+            'fakultas' => $fakultas,
+            'jurusan' => $jurusan,
         ];
         return view('create_user', $data);
 
     }
 
-    public function store(UserRequest $request){
+    public function store(Request $request){
         // Validasi input
         $request->validate([
                 'nama' => 'required|string|max:255',
-                'npm' => 'required|string|max:255',
+                'semester' => 'required|integer|max:14',
+                // 'npm' => 'required|string|max:255',
                 'kelas_id' => 'required|integer',
+                'fakultas_id' => 'required|integer',
+                'jurusan' => 'required|string|in:Fisika,Kimia,Biologi,Matematika,Ilmu Komputer',
                 'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', //Validasi untuk foto
             ]);
             // Meng-handle upload foto
             if ($request->hasFile('foto')) {
                 $foto = $request->file('foto');
-                $fotoName = $foto->hashName();
+                // $fotoName = $foto->hashName();
+                $fotoName = time() . '_' . $foto->getClientOriginalName();
                 // Menyimpan file foto di folder 'uploads'
-                $fotoPath = $foto->move(('upload/img'), $fotoName);
+                // $fotoPath = $foto->move(('upload/img'), $fotoName);
+                $foto->storeAs('uploads', $fotoName);
             } else {
                 // Jika tidak ada file yang diupload, set fotoPath menjadi null atau default
                 $fotoPath = null;
@@ -54,11 +65,14 @@ class UserController extends Controller
             // Menyimpan data ke database termasuk path foto
             $this->userModel->create([
                     'nama' => $request->input('nama'),
-                    'npm' => $request->input('npm'),
+                    'semester' => $request->input('semester'),
+                    // 'npm' => $request->input('npm'),
                     'kelas_id' => $request->input('kelas_id'),
-                    'foto' => $fotoPath, // Menyimpan path foto
+                    'fakultas_id' => $request->input('fakultas_id'),
+                    'jurusan' => $request->input('jurusan'),
+                    'foto' => $fotoName, // Menyimpan path foto
                 ]);
-                return redirect()->to('/user')->with('success', 'User berhasil ditambahkan');
+                return redirect()->to('/')->with('success', 'User berhasil ditambahkan');
 
         // $this->userModel->create([
         //     'nama' => $request->input('nama'),
@@ -72,11 +86,12 @@ class UserController extends Controller
     public function __construct(){
         $this->userModel = new UserModel();
         $this->kelasModel = new Kelas();
+        $this->fakultasModel = new Fakultas();
     }
 
     public function index(){
         $data = [
-            'title' => 'User',
+            'title' => 'List User',
             'users' => $this->userModel->getUser(),
         ];
 
@@ -95,17 +110,23 @@ class UserController extends Controller
     public function edit($id){
         $user = UserModel::findOrFail($id);
         $kelasModel = new Kelas();
+        $fakultasModel = new Fakultas();
         $kelas = $kelasModel->getKelas();
+        $fakultas = $fakultasModel->getFakultas();
+        $jurusan = ['Fisika', 'Kimia', 'Biologi', 'Matematika', 'Ilmu Komputer'];
         $title = 'Edit User';
-        return view('edit_user', compact('user', 'kelas', 'title'));
+        return view('edit_user', compact('user', 'kelas', 'fakultas', 'jurusan', 'title'));
     }
 
     public function update(Request $request, $id){
         $user = UserModel::findOrFail($id);
 
         $user->nama = $request->nama;
-        $user->npm = $request->npm;
+        // $user->npm = $request->npm;
+        $user->semester = $request->semester;
         $user->kelas_id = $request->kelas_id;
+        $user->fakultas_id = $request->fakultas_id;
+        $user->jurusan = $request->jurusan;
 
         if($request->hasFile('foto')){
             $fileName = time().'.'.$request->foto->extension();
@@ -120,6 +141,6 @@ class UserController extends Controller
     public function destroy($id){
         $user = UserModel::findOrFail($id);
         $user->delete();
-        return redirect()->to('/user')->with('success', 'User deleted successfully');
+        return redirect()->to('/')->with('success', 'User deleted successfully');
     }
 }

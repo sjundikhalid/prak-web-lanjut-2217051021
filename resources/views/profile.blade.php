@@ -46,14 +46,18 @@
     </style>
 </head>
 <body>
+    <a href="/">Back</a>
     <div class="container">
         <div class="gambar">
-            <img src="../{{ $user->foto }}" alt="">
+            <img src="{{ asset('storage/uploads/' . $user->foto) }}" alt="">
         </div>
         <div class="profil">
             <h3>{{$user->nama}}</h3>
-            <h3>{{$user->npm}}</h3>
+            <h3>{{$user->semester}}</h3>
+            <!-- <h3>{{$user->npm}}</h3> -->
             <h3>{{$user->nama_kelas ?? 'Kelas tidak ditemukan'}}</h3>
+            <h3>{{$user->nama_fakultas ?? 'Fakultas tidak ditemukan'}}</h3>
+            <h3>{{$user->jurusan}}</h3>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
