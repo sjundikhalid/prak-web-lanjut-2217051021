@@ -60,6 +60,16 @@
             border-radius: 25px;
             font-weight: bolder;
         }
+        .submit-button-edit{
+            padding: 12px 30px;
+            width: 150px;
+            margin-top: 20px;
+            background-color: #2A629A;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-weight: bolder;
+        }
         .submit-button:hover{
             cursor: pointer;
             background-color: #003285;

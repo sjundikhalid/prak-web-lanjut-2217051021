@@ -13,6 +13,14 @@
                 <p class="text-danger">{{$msg}}</p>
                 @endforeach
 
+                <input type="text" class="form-control mb-2" id="semester" placeholder="Semester" name="semester" aria-label="default input example">
+                    <!-- <label for="floatingInput">Nama</label> -->
+                <!-- </div> -->
+
+                @foreach($errors->get('semester') as $msg)
+                <p class="text-danger">{{$msg}}</p>
+                @endforeach
+
                 <div class="input-group mb-2">
                 <label class="input-group-text" for="inputGroupSelect01">Kelas</label>
                     <select class="form-select" id="kelas_id" name="kelas_id">
@@ -27,13 +35,31 @@
                 @endforeach
 
                 <!-- <div class="input-group form-floating mb-2"> -->
-                <input type="text" class="form-control mb-2" id="npm" placeholder="NPM" name="npm" aria-label="default input example">
+                <!-- <input type="text" class="form-control mb-2" id="npm" placeholder="NPM" name="npm" aria-label="default input example"> -->
                     <!-- <label for="floatingInput">NPM</label>
                 </div> -->
 
-                @foreach($errors->get('npm') as $msg)
+                <!-- @foreach($errors->get('npm') as $msg)
                 <p class="text-danger">error woi</p>
-                @endforeach
+                @endforeach -->
+
+                <div class="input-group mb-2">
+                <label class="input-group-text" for="inputGroupSelect01">Jurusan</label>
+                    <select class="form-select" id="jurusan" name="jurusan">
+                        @foreach($user->jurusan as $userItem)
+                        <option value="{{$userItem->jurusan}}">{{$userItem->jurusan}}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="input-group mb-2">
+                <label class="input-group-text" for="inputGroupSelect01">Fakultas</label>
+                    <select class="form-select" id="fakultas_id" name="fakultas_id">
+                        @foreach($fakultas as $fakultasItem)
+                        <option value="{{$fakultasItem->id}}">{{$fakultasItem->nama_fakultas}}</option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <div class="input-group mb-3">
                     <input type="file" class="form-control" id="inputGroupFile02" name="foto">

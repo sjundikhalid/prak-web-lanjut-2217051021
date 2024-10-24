@@ -14,10 +14,14 @@ class UserModel extends Model
         'nama',
         'npm',
         'kelas_id',
+        'fakultas_id',
         'foto', //kolom foto ditambahkan di sini
     ];
     public function kelas(){
         return $this->belongsTo(Kelas::class, 'kelas_id');
+    }
+    public function fakultas(){
+        return $this->belongsTo(FakultasModel::class, 'fakultas_id');
     }
     public function getUser($id = null){
         if($id != null){

@@ -48,7 +48,7 @@
 <body>
     <div class="container">
         <div class="gambar">
-            <img src="../{{ $user->foto }}" alt="">
+            <img src="{{ asset('storage/uploads/' . $user->foto) }}" alt="">
         </div>
         <div class="profil">
             <h3>{{$user->nama}}</h3>

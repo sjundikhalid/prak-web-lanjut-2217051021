@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use App\Models\FakultasModel;
 use App\Models\UserModel;
 use App\Http\Requests\UserRequest;
 
@@ -24,10 +25,13 @@ class UserController extends Controller
 
     public function create(){
         $kelasModel = new Kelas();
+        $fakultasModel = new FakultasModel();
+        $fakultas = $fakultasModel->getFakultas();
         $kelas = $kelasModel->getKelas();
         $data = [
             'title' => 'Create User',
             'kelas' => $kelas,
+            'fakultas' => $fakultas,
         ];
         return view('create_user', $data);
 
